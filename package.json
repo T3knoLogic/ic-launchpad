@@ -1,0 +1,29 @@
+{
+  "name": "ic-launchpad",
+  "private": true,
+  "scripts": {
+    "setup": "npm install && cd frontend && npm install && cd ../auth-backend && npm install && cd ../mcp && npm install",
+    "env:sync": "node scripts/sync-env.mjs",
+    "dfx:start": "dfx start --background --clean",
+    "dfx:stop": "dfx stop",
+    "deploy": "dfx deploy",
+    "deploy:local": "dfx deploy --network local",
+    "deploy:sync": "dfx deploy && node scripts/sync-env.mjs",
+    "deploy:local:sync": "dfx deploy --network local && node scripts/sync-env.mjs",
+    "deploy:frontend": "bash scripts/deploy-frontend-mainnet.sh",
+    "milady:build": "bash scripts/build-milady-for-icp.sh",
+    "milady:api": "cd milady-api && npm start",
+    "mcp:sync": "node scripts/sync-env.mjs",
+    "build": "cd frontend && npm run build",
+    "local:setup": "bash scripts/run-local.sh",
+    "local:dev": "cd frontend && npm run dev",
+    "auth:install": "cd auth-backend && npm install",
+    "auth:dev": "cd auth-backend && npm run dev",
+    "dev": "concurrently \"npm run local:dev\" \"npm run auth:dev\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:auth": "cd auth-backend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

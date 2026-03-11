@@ -1,0 +1,22 @@
+type LinkedAccount = 
+ record {
+   external_id: text;
+   provider: text;
+   username: text;
+ };
+/// * Launchpad Integrations — Link external accounts (Google, X, Instagram, etc.) to a principal.
+service : {
+  /// Link an external account. Replaces existing link for same provider.
+  link: (provider: text, external_id: text, username: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  /// List all linked accounts for the caller.
+  list_mine: () -> (vec LinkedAccount) query;
+  /// Unlink by provider name.
+  unlink: (provider: text) -> (variant {
+                                 err: text;
+                                 ok;
+                               });
+}

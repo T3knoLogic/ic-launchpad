@@ -1,0 +1,34 @@
+type CanisterInfo = 
+ record {
+   created_at: int;
+   id: principal;
+   name: text;
+   network: text;
+   owner: principal;
+ };
+/// * Launchpad Registry — Register and list canisters per owner (for UI and Cursor).
+service : {
+  /// Get one canister by id (if caller is owner or public read - we allow read for any caller for simplicity).
+  get: (canister_id: principal) -> (opt CanisterInfo) query;
+  /// List all registered canisters (for personal Launchpad; allows II principal to see canisters registered by dfx identity).
+  list_all: () -> (vec CanisterInfo) query;
+  /// List all canisters owned by the caller.
+  list_mine: () -> (vec CanisterInfo) query;
+  /// Register a canister (id, name, network). Caller becomes owner.
+  register: (canister_id: principal, name: text, network: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  /// Unregister (only owner).
+  unregister: (canister_id: principal) -> (variant {
+                                             err: text;
+                                             ok;
+                                           });
+  /// Update name (only owner).
+  update_name: (canister_id: principal, name: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+}

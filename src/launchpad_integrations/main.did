@@ -1,0 +1,11 @@
+type LinkedAccount = record {
+  external_id: text;
+  provider: text;
+  username: text;
+};
+type Result = variant { ok; err: text };
+service : {
+  link: (text, text, text) -> (Result);
+  list_mine: () -> (vec LinkedAccount) query;
+  unlink: (text) -> (Result);
+}

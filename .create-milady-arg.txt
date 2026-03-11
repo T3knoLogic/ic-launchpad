@@ -1,0 +1,1 @@
+(1000_000_000_000, opt vec { principal "kvn5d-w5oba-kyppl-ffjvv-bzgqz-cei77-pqypp-w4u64-gpzse-7r4ex-7qe"; principal "tw5ow-tiaaa-aaaau-afpha-cai" })

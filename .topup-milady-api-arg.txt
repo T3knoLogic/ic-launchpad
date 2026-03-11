@@ -1,0 +1,1 @@
+(principal "uf5nc-hyaaa-aaaau-afpua-cai", 200_000_000_000)

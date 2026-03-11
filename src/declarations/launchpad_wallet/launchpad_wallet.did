@@ -1,0 +1,27 @@
+type TopUpResult = 
+ variant {
+   err: text;
+   ok;
+ };
+type CreateResult = 
+ variant {
+   err: text;
+   ok: principal;
+ };
+/// * Launchpad Wallet — Hold cycles, create canisters, top up canisters.
+///  * Accept cycles via wallet_receive or deposit(); controllers can create_canister and top_up.
+service : {
+  /// Create a new canister with the given cycles. Caller must be a controller of this canister.
+  create_canister_with_cycles: (amount: nat, controllers:
+   opt vec principal) -> (CreateResult);
+  /// Deposit cycles from the caller (attach cycles to this call).
+  deposit: () -> (record {accepted: nat;});
+  /// Current cycle balance of this canister.
+  get_balance: () -> (nat) query;
+  /// Top up a canister with cycles from this wallet. Caller must be a controller.
+  top_up: (canister_id: principal, amount: nat) -> (TopUpResult);
+  /// Accept cycles into this canister (standard wallet_receive).
+  wallet_receive: () -> (record {accepted: nat64;});
+  /// This canister's principal.
+  whoami: () -> (principal) query;
+}

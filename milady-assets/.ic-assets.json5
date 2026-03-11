@@ -1,0 +1,10 @@
+// Asset canister config for Milady. Use icp0.io gateway (canister may not be
+// available via ic0.app when created via Launchpad). CSP allows both gateways.
+[
+  {
+    "match": "**/*",
+    "headers": {
+      "Content-Security-Policy": "default-src 'self' capacitor-electron://* https://* http://localhost:* http://127.0.0.1:*; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' 'unsafe-eval' http://localhost:* http://127.0.0.1:* https://*; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*; connect-src 'self' blob: data: http://localhost:* ws://localhost:* wss://localhost:* http://127.0.0.1:* ws://127.0.0.1:* wss://127.0.0.1:* https://ic0.app https://*.ic0.app https://icp0.io https://*.icp0.io https://icp-api.io wss://*; img-src 'self' data: blob: http://localhost:* http://127.0.0.1:* https://*; media-src 'self' blob: http://localhost:* https://*; font-src 'self' data: https://fonts.gstatic.com https://*; frame-src 'self' http://localhost:* https://*; worker-src 'self' blob:;"
+    }
+  }
+]

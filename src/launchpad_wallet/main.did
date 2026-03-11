@@ -1,0 +1,17 @@
+type Result = variant { ok: principal; err: text };
+type Result_1 = variant { ok; err: text };
+type canister_id = principal;
+type canister_settings = record {
+  compute_allocation: opt nat;
+  controllers: opt vec principal;
+  freezing_threshold: opt nat;
+  memory_allocation: opt nat;
+};
+service : {
+  create_canister_with_cycles: (nat, opt vec principal) -> (Result);
+  deposit: () -> (record { accepted: nat });
+  get_balance: () -> (nat) query;
+  top_up: (principal, nat) -> (Result_1);
+  wallet_receive: () -> (record { accepted: nat64 });
+  whoami: () -> (principal) query;
+}

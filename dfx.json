@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "canisters": {
+    "launchpad_wallet": {
+      "type": "motoko",
+      "main": "src/launchpad_wallet/main.mo",
+      "candid": "src/launchpad_wallet/main.did"
+    },
+    "cycles_forwarder": {
+      "type": "motoko",
+      "main": "src/cycles_forwarder/main.mo",
+      "candid": "src/cycles_forwarder/main.did"
+    },
+    "launchpad_registry": {
+      "type": "motoko",
+      "main": "src/launchpad_registry/main.mo",
+      "candid": "src/launchpad_registry/main.did"
+    },
+    "launchpad_integrations": {
+      "type": "motoko",
+      "main": "src/launchpad_integrations/main.mo",
+      "candid": "src/launchpad_integrations/main.did"
+    },
+    "launchpad_frontend": {
+      "type": "assets",
+      "source": ["frontend/dist"],
+      "dependencies": ["launchpad_wallet", "launchpad_registry", "launchpad_integrations"]
+    },
+    "milady_launchpad": {
+      "type": "assets",
+      "source": ["milady-assets/dist"],
+      "dependencies": [],
+      "build": []
+    },
+    "milady_api": {
+      "type": "motoko",
+      "main": "src/milady_api/main.mo",
+      "candid": "src/milady_api/main.did"
+    }
+  },
+  "defaults": { "build": { "packtool": "", "args": "" } },
+  "output_env_file": ".env",
+  "networks": {
+    "local": { "bind": "0.0.0.0:4943" },
+    "ic": { "providers": ["https://mainnet.dfinity.network"], "type": "persistent" }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

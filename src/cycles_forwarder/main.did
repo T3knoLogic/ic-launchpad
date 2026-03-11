@@ -1,0 +1,5 @@
+type Result = variant { ok; err : text };
+service : {
+  forward_cycles : (principal, nat) -> (Result);
+  get_balance : () -> (nat) query;
+}

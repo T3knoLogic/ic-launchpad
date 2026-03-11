@@ -1,0 +1,20 @@
+{
+  "launchpad_frontend": {
+    "ic": "tnyst-jqaaa-aaaau-afpfq-cai"
+  },
+  "launchpad_integrations": {
+    "ic": "ty7d6-iyaaa-aaaau-afpga-cai"
+  },
+  "launchpad_registry": {
+    "ic": "t76fk-faaaa-aaaau-afpgq-cai"
+  },
+  "launchpad_wallet": {
+    "ic": "tw5ow-tiaaa-aaaau-afpha-cai"
+  },
+  "milady_api": {
+    "ic": "uf5nc-hyaaa-aaaau-afpua-cai"
+  },
+  "milady_launchpad": {
+    "ic": "q2k6b-yiaaa-aaaau-afpna-cai"
+  }
+}

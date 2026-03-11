@@ -1,0 +1,20 @@
+# Render.com Blueprint - Milady API for ICP Launchpad
+# Create new Web Service and paste env vars from .env.example
+services:
+  - type: web
+    name: milady-api-icp
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_VERSION
+        value: 22
+      - key: MILADY_ALLOWED_ORIGINS
+        sync: false  # Set in Dashboard: https://q2k6b-yiaaa-aaaau-afpna-cai.icp0.io
+      - key: GROQ_API_KEY
+        sync: false  # Optional - get free key at https://console.groq.com
+      - key: AGENT_NAME
+        value: Milady

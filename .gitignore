@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# DFX / IC
+.dfx/
+*.wasm
+target/
+
+# Build outputs
+frontend/dist/
+milady-assets/dist/
+*.log
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,16 @@
+type CanisterInfo = record {
+  created_at: int;
+  id: principal;
+  name: text;
+  network: text;
+  owner: principal;
+};
+type Result = variant { ok; err: text };
+service : {
+  get: (principal) -> (opt CanisterInfo) query;
+  list_all: () -> (vec CanisterInfo) query;
+  list_mine: () -> (vec CanisterInfo) query;
+  register: (principal, text, text) -> (Result);
+  unregister: (principal) -> (Result);
+  update_name: (principal, text) -> (Result);
+}

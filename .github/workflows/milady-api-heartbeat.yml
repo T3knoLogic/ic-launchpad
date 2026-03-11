@@ -1,0 +1,20 @@
+# Keep Milady API canister warm to avoid cold starts.
+# Runs every 5 minutes - pings /api/status so the canister stays active.
+name: Milady API Heartbeat
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"  # Every 5 minutes
+  workflow_dispatch:       # Allow manual trigger
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Milady API
+        run: |
+          echo "Pinging Milady API canister..."
+          curl -sf --max-time 60 "https://uf5nc-hyaaa-aaaau-afpua-cai.icp0.io/api/status" \
+            -H "Accept: application/json" \
+            -o /dev/null -w "Status: %{http_code}, Time: %{time_total}s\n" \
+            || echo "Heartbeat request completed (canister may have been cold)"

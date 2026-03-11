@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ic-green: #00d4aa;
+  --ic-dark: #0a0a0f;
+  --ic-panel: #12121a;
+  --ic-border: #1e1e2e;
+}
+
+/* Light theme overrides */
+html.light {
+  --ic-dark: #f0f0f5;
+  --ic-panel: #ffffff;
+  --ic-border: #e0e0e8;
+}
+
+html.light body {
+  @apply text-gray-900;
+}
+
+html.light .card {
+  @apply bg-white/90 border-gray-200;
+}
+
+html.light .hud-sidebar {
+  @apply bg-white/80 border-gray-200;
+}
+
+body {
+  @apply bg-ic-dark text-gray-100 font-sans antialiased min-h-screen;
+}
+
+/* HUD glassmorphism */
+.hud-container {
+  @apply min-h-screen flex;
+}
+
+.hud-sidebar {
+  @apply w-56 min-h-screen flex-shrink-0 border-r border-ic-border;
+  background: rgba(18, 18, 26, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.hud-sidebar-inner {
+  @apply flex flex-col h-full p-4;
+}
+
+.hud-brand {
+  @apply flex items-center gap-2 mb-6;
+}
+
+.hud-logo {
+  @apply text-2xl text-ic-green;
+}
+
+.hud-title {
+  @apply font-display font-bold text-white text-lg;
+}
+
+.hud-section {
+  @apply mb-4 p-3 rounded-xl border border-ic-border/60 bg-ic-dark/50;
+}
+
+.hud-cycles {
+  @apply flex items-baseline gap-2;
+}
+
+.hud-cycles-label {
+  @apply text-xs text-gray-500 uppercase tracking-wider;
+}
+
+.hud-cycles-value {
+  @apply font-mono font-semibold text-sm;
+}
+
+.hud-alert {
+  @apply text-amber-400 text-sm ml-1;
+}
+
+.hud-principal {
+  @apply flex items-center mt-2 text-gray-400;
+}
+
+.hud-nav {
+  @apply flex-1 flex flex-col gap-1 py-4;
+}
+
+.hud-nav-link {
+  @apply flex items-center gap-2 px-3 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-ic-green/10 transition;
+}
+
+.hud-nav-active {
+  @apply text-ic-green bg-ic-green/15 border-l-2 border-ic-green -ml-[2px] pl-[14px];
+}
+
+.hud-nav-icon {
+  @apply text-ic-green/70 w-4;
+}
+
+.hud-footer {
+  @apply mt-auto pt-4 border-t border-ic-border flex flex-wrap items-center justify-between gap-2;
+}
+
+.hud-icon-btn {
+  @apply relative p-2 rounded-lg hover:bg-ic-green/20 text-gray-400 hover:text-ic-green transition;
+}
+
+.hud-logout, .hud-login {
+  @apply text-xs px-2 py-1 rounded border border-ic-border hover:border-ic-green/50 text-gray-400 hover:text-ic-green transition;
+}
+
+.hud-login {
+  @apply bg-ic-green/20 text-ic-green border-ic-green/40;
+}
+
+.hud-main {
+  @apply flex-1 min-w-0 p-6 lg:p-8 overflow-auto;
+}
+
+.hud-overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm;
+}
+
+.hud-modal {
+  @apply p-6 rounded-2xl border border-ic-border bg-ic-panel shadow-2xl max-w-md w-full mx-4;
+}
+
+.hud-notifications {
+  @apply max-w-sm;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 rounded-lg bg-ic-green text-ic-dark font-semibold hover:opacity-90 transition;
+  }
+  .btn-secondary {
+    @apply px-4 py-2 rounded-lg border border-ic-border bg-ic-panel/80 hover:bg-ic-border transition;
+  }
+  .card {
+    @apply rounded-xl border border-ic-border bg-ic-panel/60 backdrop-blur-sm p-6;
+  }
+}

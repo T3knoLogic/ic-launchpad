@@ -1,0 +1,45 @@
+---
+description: Use the ICP Launchpad to deploy and manage canisters from Cursor
+globs: 
+  - "**/ic-launchpad/**"
+  - "**/dfx.json"
+  - "**/*.mo"
+  - "**/mcp/**"
+---
+
+# ICP Launchpad — Deploy from Cursor
+
+## Cycle conservation (mandatory)
+
+**Conserve cycles whenever possible.** Before creating new canisters, reusing existing ones, or topping up:
+- Prefer **reusing** canisters that already exist (we have Launchpad Wallet, Registry, Integrations, Frontend, Bazaar Backend, Payment System, Payment Backend, Shopify Integration, Payment Bridge).
+- Create new canisters only when necessary.
+- Top up with minimal amounts; avoid over-provisioning.
+- Use `scripts/register-existing-canisters.sh` to register existing canisters instead of creating new ones.
+
+---
+
+When the user wants to **deploy to the Internet Computer (ICP)** or **manage canisters**:
+
+1. **Launchpad MCP** — Prefer using the `ic-launchpad-mcp` tools when available:
+   - `launchpad_balance` — Show Launchpad Wallet cycles balance
+   - `launchpad_create_canister` — Create empty canister with cycles (returns canister ID)
+   - `launchpad_top_up` — Top up a canister with cycles
+   - `launchpad_list_canisters` — List registered canisters
+   - `launchpad_register_canister` — Register a canister (id, name, network)
+   - `launchpad_deploy` — Run `dfx deploy` (optionally for a given project path and network)
+
+2. **Workflow** — To deploy an app or agent the user is building:
+   - **First check registered canisters** — Reuse an existing canister if it fits the purpose (cycle conservation).
+   - If they truly need a new canister: suggest or call `launchpad_create_canister` with a **minimal** cycles amount (e.g. 500_000_000_000 for 0.5T); avoid excessive top-ups.
+   - Then run `launchpad_deploy` with the project path (or current directory) and `network: ic` to build and install code.
+   - Optionally register the canister with `launchpad_register_canister` so it appears in the Launchpad UI.
+
+3. **Wallet & cycles** — The Launchpad Wallet canister holds cycles. The user can:
+   - Get balance via `launchpad_balance`
+   - Create canisters and top up from that balance
+   - Add more cycles by converting ICP (`dfx cycles convert`) and sending cycles to the wallet’s `wallet_receive`.
+
+4. **Project layout** — The Launchpad repo is `ic-launchpad/`: Motoko canisters in `src/launchpad_wallet` and `src/launchpad_registry`, frontend in `frontend/`, MCP server in `mcp/`.
+
+When the user says they want to “deploy to IC” or “ship this to the Internet Computer”, use the Launchpad MCP tools and/or `dfx deploy` as above.
