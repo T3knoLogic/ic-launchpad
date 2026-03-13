@@ -1,0 +1,41 @@
+%% Bonsai Ecosystem Infrastructure (March 2026)
+%% Export to PNG via: npx @mermaid-js/mermaid-cli mmdc -i ecosystem-infrastructure-2026.mmd -o bonsai-ecosystem-infrastructure.png
+%% Or use https://mermaid.live
+
+flowchart TB
+    subgraph Products
+        NM[NFT Matrix]
+        MA[Machina]
+        BW[Bonsai Widget]
+        BZ[Bazaar]
+    end
+
+    subgraph Distribution
+        SUB[Substack Automation]
+        AI16Z[ai16z-shopify-agent]
+        DSCVR[DSCVR / X / Bluesky]
+    end
+
+    subgraph Infrastructure
+        DSB[Drop-Shipping-Beast]
+        ICL[IC Launchpad]
+        MCP[IC-MCP]
+        REG[Bonsai Registry]
+        RAD[Bonsai Radio]
+    end
+
+    subgraph Tokens
+        BONSAI["$BONSAI (Odin.Fun)"]
+    end
+
+    NM --> SUB
+    MA --> SUB
+    BZ --> SUB
+    REG --> SUB
+    BZ --> AI16Z
+    AI16Z --> DSCVR
+    SUB --> DSCVR
+    BZ --> DSB
+    ICL --> MCP
+    BZ --> BONSAI
+    RAD --> BONSAI

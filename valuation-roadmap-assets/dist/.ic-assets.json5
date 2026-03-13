@@ -1,0 +1,10 @@
+// Allow external images (Shopify logo) and proper MIME types for roadmap assets
+[
+  {
+    "match": "**/*",
+    "security_policy": "standard",
+    "headers": {
+      "Content-Security-Policy": "default-src 'self' https://cdn.shopify.com; script-src 'self' https://cdn.jsdelivr.net; img-src 'self' https://cdn.shopify.com https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com;"
+    }
+  }
+]

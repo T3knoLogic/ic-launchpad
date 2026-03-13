@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonsai — Valuation Growth Roadmap</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0709/4953/5993/files/logo2_a05c26b6-7472-4a3e-b8bc-48dcb6ca4683.png">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #050508;
+            --card: rgba(18, 18, 22, 0.85);
+            --card-border: rgba(255, 51, 51, 0.2);
+            --primary: #FF3333;
+            --primary-glow: rgba(255, 51, 51, 0.4);
+            --secondary: #FF6666;
+            --gold: #F5D547;
+            --gold-dim: rgba(245, 213, 71, 0.6);
+            --muted: #8a8a9a;
+            --accent-cyan: #00d4ff;
+        }
+        body {
+            font-family: 'Outfit', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: #e8e8ec;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* Animated mesh background */
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse 120% 80% at 20% 0%, rgba(255, 51, 51, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 120% at 80% 100%, rgba(245, 213, 71, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255, 51, 51, 0.06) 0%, transparent 70%);
+        }
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,51,51,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,51,51,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(255,51,51,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-logo {
+            width: 72px;
+            height: 72px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(255,51,51,0.3));
+        }
+        .hero h1 {
+            font-size: clamp(1.9rem, 4vw, 2.6rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, #c9a91a 100%);
+            color: #000;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            box-shadow: 0 0 24px rgba(245,213,71,0.3);
+        }
+        .hero .range {
+            font-size: 1.3rem;
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1rem;
+        }
+        .hero .range .prev { color: var(--muted); text-decoration: line-through; }
+        .hero .range .arrow { color: var(--gold); font-weight: 500; }
+        .hero .range .next { color: var(--gold); font-weight: 700; text-shadow: 0 0 20px rgba(245,213,71,0.3); }
+        .hero .date { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* Container */
+        .container { max-width: 920px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            animation: fadeUp 0.6s ease-out backwards;
+        }
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.15s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.25s; }
+        section:nth-child(5) { animation-delay: 0.3s; }
+        section:nth-child(6) { animation-delay: 0.35s; }
+        section:nth-child(7) { animation-delay: 0.4s; }
+        section:nth-child(8) { animation-delay: 0.45s; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255,51,51,0.25);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.2em;
+            background: linear-gradient(180deg, var(--primary), var(--gold));
+            border-radius: 2px;
+        }
+
+        /* Valuation Path Chart - SVG */
+        .chart-wrap {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+        }
+        .valuation-chart {
+            width: 100%;
+            height: 220px;
+        }
+        .chart-bar {
+            transition: all 0.4s ease;
+        }
+        .chart-bar:hover { filter: brightness(1.2); }
+        .chart-label { font-size: 0.8rem; fill: var(--muted); }
+        .chart-value { font-size: 0.85rem; font-weight: 600; fill: var(--gold); }
+
+        /* Upgrade cards */
+        .upgrade-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .upgrade-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.25rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .upgrade-card:hover {
+            border-color: rgba(255,51,51,0.4);
+            box-shadow: 0 0 30px rgba(255,51,51,0.08);
+        }
+        .upgrade-card h4 {
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .upgrade-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+
+        /* Tool cards */
+        .tools-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .tool-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1.2fr;
+            gap: 1.5rem;
+            align-items: start;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 700px) {
+            .tool-card { grid-template-columns: 1fr; }
+        }
+        .tool-card:hover {
+            border-color: rgba(255,51,51,0.35);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .tool-card.new { border-color: rgba(245,213,71,0.4); }
+        .tool-card.new::before {
+            content: 'NEW';
+            position: absolute;
+            top: 0.75rem;
+            right: 1rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+        .tool-card { position: relative; }
+        .tool-name { color: var(--primary); font-weight: 600; font-size: 1rem; }
+        .tool-role { color: var(--muted); font-size: 0.9rem; }
+        .tool-value { color: #b8b8c4; font-size: 0.875rem; }
+        .tool-value strong { color: var(--gold); }
+
+        /* Mermaid */
+        .mermaid-wrap {
+            background: linear-gradient(145deg, rgba(12,12,16,0.95) 0%, rgba(8,8,12,0.98) 100%);
+            border: 1px solid rgba(255,51,51,0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        .mermaid { background: transparent !important; }
+
+        /* Ranges table */
+        .ranges-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+        .ranges-table th, .ranges-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .ranges-table th {
+            background: rgba(255,51,51,0.08);
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .ranges-table tr:last-child td { border-bottom: none; }
+        .ranges-table tr:hover td { background: rgba(255,255,255,0.02); }
+        .ranges-table .proposed { color: var(--gold); font-weight: 700; }
+
+        /* Priority matrix visual */
+        .priority-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .quadrant {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.25rem;
+            min-height: 140px;
+        }
+        .quadrant.high-impact { border-color: rgba(255,51,51,0.3); }
+        .quadrant.high-impact .quadrant-title { color: var(--primary); }
+        .quadrant .quadrant-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .quadrant ul { list-style: none; padding: 0; }
+        .quadrant li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0;
+            font-size: 0.9rem;
+            color: #c4c4d0;
+        }
+        .quadrant li::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Value drivers */
+        .value-drivers {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .driver-pill {
+            background: linear-gradient(135deg, rgba(255,51,51,0.12) 0%, rgba(255,51,51,0.04) 100%);
+            border: 1px solid rgba(255,51,51,0.2);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            font-size: 0.9rem;
+        }
+        .driver-pill strong { color: var(--primary); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist .box {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--gold-dim);
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="mesh-bg"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="hero">
+        <img src="https://cdn.shopify.com/s/files/1/0709/4953/5993/files/logo2_a05c26b6-7472-4a3e-b8bc-48dcb6ca4683.png" alt="Bonsai" class="hero-logo">
+        <h1>Bonsai Valuation Re-Assessment</h1>
+        <span class="badge">March 2026</span>
+        <div class="range">
+            <span class="prev">$350K–$850K</span>
+            <span class="arrow">→</span>
+            <span class="next">$400K–$950K</span>
+            <span style="color: var(--muted);">|</span>
+            <span style="color: var(--secondary);">$1.5M+ strategic</span>
+        </div>
+        <p class="date">March 12, 2026</p>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>What Changed (Recent Upgrades)</h2>
+            <div class="upgrade-grid">
+                <div class="upgrade-card">
+                    <h4>Substack Automation</h4>
+                    <p>T3kNo-Logic Substack live. Content pipeline: optimize, publish, revenue tracking, cross-post.</p>
+                </div>
+                <div class="upgrade-card">
+                    <h4>Content Distribution</h4>
+                    <p>New channel for $BONSAI, E Phunks, NFT Matrix, Bazaar. Investor visibility.</p>
+                </div>
+                <div class="upgrade-card">
+                    <h4>Product-Linked Promos</h4>
+                    <p>Short posts with images → product links. Bazaar, Gumroad conversion format.</p>
+                </div>
+                <div class="upgrade-card">
+                    <h4>E Phunks + Candace Marquette</h4>
+                    <p>10k collection, Bazaar merch, Revelation Walls. Stronger artist narrative.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Valuation Growth Path</h2>
+            <div class="chart-wrap">
+                <svg class="valuation-chart" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
+                            <stop offset="0%" stop-color="#FF3333"/>
+                            <stop offset="100%" stop-color="#F5D547"/>
+                        </linearGradient>
+                        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#FF3333"/>
+                            <stop offset="100%" stop-color="#F5D547"/>
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Bars -->
+                    <g class="chart-bar">
+                        <rect x="40" y="140" width="80" height="60" rx="6" fill="url(#barGrad)" opacity="0.4"/>
+                        <text x="80" y="215" class="chart-label" text-anchor="middle">Base</text>
+                        <text x="80" y="125" class="chart-value" text-anchor="middle">$600K</text>
+                    </g>
+                    <g class="chart-bar">
+                        <rect x="150" y="105" width="80" height="95" rx="6" fill="url(#barGrad)" opacity="0.6"/>
+                        <text x="190" y="215" class="chart-label" text-anchor="middle">Phase 1</text>
+                        <text x="190" y="90" class="chart-value" text-anchor="middle">$800K</text>
+                    </g>
+                    <g class="chart-bar">
+                        <rect x="260" y="65" width="80" height="135" rx="6" fill="url(#barGrad)" opacity="0.8"/>
+                        <text x="300" y="215" class="chart-label" text-anchor="middle">Phase 2</text>
+                        <text x="300" y="50" class="chart-value" text-anchor="middle">$1.1M</text>
+                    </g>
+                    <g class="chart-bar">
+                        <rect x="370" y="25" width="80" height="175" rx="6" fill="url(#barGrad)" filter="url(#glow)"/>
+                        <text x="410" y="215" class="chart-label" text-anchor="middle">Phase 3</text>
+                        <text x="410" y="10" class="chart-value" text-anchor="middle">$1.5M</text>
+                    </g>
+                    <g class="chart-bar">
+                        <rect x="480" y="0" width="80" height="200" rx="6" fill="url(#barGrad)" filter="url(#glow)"/>
+                        <text x="520" y="215" class="chart-label" text-anchor="middle">Upside</text>
+                        <text x="520" y="-12" class="chart-value" text-anchor="middle">$2M</text>
+                    </g>
+                    <!-- Line connection -->
+                    <path d="M 80 150 L 190 115 L 300 72 L 410 32 L 520 0" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+                </svg>
+            </div>
+        </section>
+
+        <section>
+            <h2>Updated Ecosystem Infrastructure</h2>
+            <div class="mermaid-wrap">
+                <div class="mermaid">
+flowchart TB
+    subgraph Products
+        NM[NFT Matrix]
+        MA[Machina]
+        BW[Bonsai Widget]
+        BZ[Bazaar]
+    end
+    subgraph Distribution
+        SUB[Substack Automation]
+        AI16Z[ai16z-shopify-agent]
+        DSCVR[DSCVR / X / Bluesky]
+    end
+    subgraph Infrastructure
+        DSB[Drop-Shipping-Beast]
+        ICL[IC Launchpad]
+        MCP[IC-MCP]
+        REG[Bonsai Registry]
+        RAD[Bonsai Radio]
+    end
+    subgraph Tokens
+        BONSAI["$BONSAI Odin.Fun"]
+    end
+    NM --> SUB
+    MA --> SUB
+    BZ --> SUB
+    REG --> SUB
+    BZ --> AI16Z
+    AI16Z --> DSCVR
+    SUB --> DSCVR
+    BZ --> DSB
+    ICL --> MCP
+    BZ --> BONSAI
+    RAD --> BONSAI
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>New Tools Inventory (Including Substack)</h2>
+            <div class="tools-grid">
+                <div class="tool-card new">
+                    <span class="tool-name">Substack Automation</span>
+                    <span class="tool-role">Content pipeline, SEO, publish from markdown, revenue dashboard, cross-post to X</span>
+                    <span class="tool-value"><strong>NEW.</strong> Recurring content; $BONSAI promo; investor narrative.</span>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-name">python-substack</span>
+                    <span class="tool-role">Publish posts with images, cookie/email auth</span>
+                    <span class="tool-value">Automated newsletter, no gateway deps.</span>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-name">Drop-Shipping-Beast</span>
+                    <span class="tool-role">Shopify app — order holding, Principal ID checkout</span>
+                    <span class="tool-value">RWA airdrop, $BONSAI utility hooks.</span>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-name">IC Launchpad</span>
+                    <span class="tool-role">Canister management, deploy flows, Milady</span>
+                    <span class="tool-value">ICP infrastructure narrative.</span>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-name">IC-MCP</span>
+                    <span class="tool-role">Motoko validation, docs, sandbox</span>
+                    <span class="tool-value"><strong>$300K–$600K</strong> Year 1 potential.</span>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-name">ai16z-shopify-agent</span>
+                    <span class="tool-role">Auto-promotes Bazaar to DSCVR, Bluesky, X</span>
+                    <span class="tool-value">Organic traffic → conversion.</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Revised Valuation Ranges</h2>
+            <table class="ranges-table">
+                <thead>
+                    <tr><th>Scenario</th><th>Previous</th><th>Proposed</th><th>Rationale</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Conservative</td><td>$300K–$550K</td><td class="proposed">$350K–$600K</td><td>Substack = new distribution</td></tr>
+                    <tr><td>Revenue-based</td><td>$200K–$450K</td><td class="proposed">$250K–$500K</td><td>Newsletter supports conversion</td></tr>
+                    <tr><td>Growth premium</td><td>$450K–$850K</td><td class="proposed">$500K–$950K</td><td>Content automation + multi-channel</td></tr>
+                    <tr><td>Strategic premium</td><td>+20–50%</td><td class="proposed">+25–55%</td><td>Substack audience = acquirer interest</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Priority Matrix</h2>
+            <div class="priority-matrix">
+                <div class="quadrant high-impact">
+                    <div class="quadrant-title">High Impact, Low Effort</div>
+                    <ul>
+                        <li>Monetize Bonsai Registry</li>
+                        <li>Add $BONSAI utility (Bazaar discount)</li>
+                        <li>Document & publish revenue</li>
+                        <li>ICP infrastructure narrative</li>
+                    </ul>
+                </div>
+                <div class="quadrant high-impact">
+                    <div class="quadrant-title">High Impact, Medium Effort</div>
+                    <ul>
+                        <li>IC-MCP Code Audit / SaaS MVP</li>
+                        <li>NFT Matrix Pro / annual tier</li>
+                        <li>License Revelation Walls</li>
+                    </ul>
+                </div>
+                <div class="quadrant">
+                    <div class="quadrant-title">Medium Impact</div>
+                    <ul>
+                        <li>Bonsai Certified badge</li>
+                        <li>Studio license tier</li>
+                        <li>Machina DLC</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Value Drivers (Updated)</h2>
+            <div class="value-drivers">
+                <div class="driver-pill"><strong>NFT Matrix</strong> — 28+ chains, no sub, local</div>
+                <div class="driver-pill"><strong>$BONSAI token</strong> — Odin.Fun; cohesion</div>
+                <div class="driver-pill"><strong>Revelation Walls</strong> — Candace Marquette; E Phunks</div>
+                <div class="driver-pill"><strong>ICP + RWA</strong> — Bazaar airdrop live</div>
+                <div class="driver-pill"><strong>Integrated ecosystem</strong> — Software, merch, radio, token, newsletter</div>
+                <div class="driver-pill"><strong>Automated content</strong> — Substack, ai16z, DSCVR/X</div>
+                <div class="driver-pill"><strong>Build cost</strong> — 30+ canisters, gallery, Registry, Substack</div>
+                <div class="driver-pill"><strong>Community flywheel</strong> — Collective + Radio + token + Substack</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Next Steps</h2>
+            <ul class="checklist">
+                <li><span class="box"></span>Monetize Bonsai Registry</li>
+                <li><span class="box"></span>Add $BONSAI utility (Bazaar discount)</li>
+                <li><span class="box"></span>Document & publish revenue</li>
+                <li><span class="box"></span>IC-MCP Code Audit or SaaS MVP</li>
+            </ul>
+        </section>
+
+        <p class="footer">Infrastructure is shipped. Time to monetize.</p>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#FF3333',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#FF6666',
+                lineColor: '#555',
+                secondaryColor: '#1a1a1f',
+                tertiaryColor: '#0d0d10',
+                background: '#0a0a0c',
+                mainBkg: '#15151a',
+                secondBkg: '#111116',
+                border1: '#FF3333',
+                border2: '#FF6666',
+                arrowheadColor: '#FF3333',
+                fontFamily: 'Outfit, sans-serif'
+            }
+        });
+    </script>
+</body>
+</html>
