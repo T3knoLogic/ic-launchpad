@@ -1,0 +1,4 @@
+node_modules/
+.launchpad-state.json
+.env.bridge
+npm-debug.log*
